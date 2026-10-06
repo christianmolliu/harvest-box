@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HarvestBox</title>
+</head>
+<body>
+<h1>Build Your Box</h1>
+
+<form method="POST" th:action="@{/design}" th:object="${box}">
+
+    <h3>Box name:</h3>
+    <input type="text" th:field="*{name}"/>
+    <span th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}">Name Error</span>
+
+    <h3>Choose a vegetable:</h3>
+    <div th:each="p : ${vegetable}">
+        <input type="radio" th:field="*{vegetableId}" th:value="${p.id}"/>
+        <span th:text="${p.name}">Vegetable</span>
+        (<span th:text="${p.price}">0.00</span>)<br/>
+    </div>
+    <span th:if="${#fields.hasErrors('vegetableId')}"
+          th:errors="*{vegetableId}">Vegetable Error</span>
+
+    <h3>Choose a fruit:</h3>
+    <div th:each="p : ${fruit}">
+        <input type="radio" th:field="*{fruitId}" th:value="${p.id}"/>
+        <span th:text="${p.name}">Fruit</span>
+        (<span th:text="${p.price}">0.00</span>)<br/>
+    </div>
+
+    <h3>Choose a grain:</h3>
+    <div th:each="p : ${grain}">
+        <input type="radio" th:field="*{grainId}" th:value="${p.id}"/>
+        <span th:text="${p.name}">Grain</span>
+        (<span th:text="${p.price}">0.00</span>)<br/>
+    </div>
+
+    <h3>Choose a dairy item:</h3>
+    <div th:each="p : ${dairy}">
+        <input type="radio" th:field="*{dairyId}" th:value="${p.id}"/>
+        <span th:text="${p.name}">Dairy</span>
+        (<span th:text="${p.price}">0.00</span>)<br/>
+    </div>
+
+    <h3>Choose a protein:</h3>
+    <div th:each="p : ${protein}">
+        <input type="radio" th:field="*{proteinId}" th:value="${p.id}"/>
+        <span th:text="${p.name}">Protein</span>
+        (<span th:text="${p.price}">0.00</span>)<br/>
+    </div>
+
+    <input type="submit" value="Add to Order"/>
+</form>
+</body>
+</html>

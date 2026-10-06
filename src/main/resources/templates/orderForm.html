@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HarvestBox</title>
+</head>
+<body>
+<h1>Your Order</h1>
+
+<h3>Boxes so far:</h3>
+<ul>
+    <li th:each="box : ${order.boxes}"
+        th:text="${box.name}">box name</li>
+</ul>
+
+<form method="POST" th:action="@{/order}" th:object="${order}">
+    <label for="customerName">Name: </label>
+    <input type="text" th:field="*{customerName}"/><br/>
+
+    <label for="customerStreet">Street: </label>
+    <input type="text" th:field="*{customerStreet}"/><br/>
+
+    <label for="customerCity">City: </label>
+    <input type="text" th:field="*{customerCity}"/><br/>
+
+    <label for="customerState">State: </label>
+    <input type="text" th:field="*{customerState}"/><br/>
+
+    <label for="customerZip">Zip: </label>
+    <input type="text" th:field="*{customerZip}"/><br/>
+
+    <label for="ccNumber">Card number: </label>
+    <input type="text" th:field="*{ccNumber}"/>
+    <span th:if="${#fields.hasErrors('ccNumber')}"
+          th:errors="*{ccNumber}">CC Error</span><br/>
+
+    <label for="ccExpiration">Expiration: </label>
+    <input type="text" th:field="*{ccExpiration}"/><br/>
+
+    <label for="ccCVV">CVV: </label>
+    <input type="text" th:field="*{ccCVV}"/><br/>
+
+    <input type="submit" value="Place Order"/>
+</form>
+
+<p><a th:href="@{/design}">Add another box</a></p>
+</body>
+</html>
